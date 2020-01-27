@@ -63,14 +63,14 @@ class NewGame extends Component {
         this.playerAttack();
     };
 
-    heal = () => {
+    heal = async () => {
         const { player } = this.state;
         if (player < 100) {
+            await this.dragonAttack();
             const life = this.generateRandom();
             this.setState({
                 player: player + life
             });
-            // this.dragonAttack();
         }
     };
 
