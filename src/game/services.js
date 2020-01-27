@@ -2,6 +2,7 @@ import { Http } from '../_utils/http';
 const API_URL = 'localhost:8080';
 
 export function fetchPreviousGames(userId) {
+    // Commented since no Backend and use mock data
     // return Http.get(`${API_URL}/fetchPreviousGames?userId=${userId}`);
     return Promise.resolve(
         [

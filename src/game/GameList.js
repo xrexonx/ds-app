@@ -26,12 +26,12 @@ class GameList extends Component {
             <main className="mdl-layout__content">
                 <div className="mdl-grid">
                     <h5>Previous Games</h5>
-                    <Link
-                        to="/newGame"
-                        className="mdl-button mdl-js-button"
-                    >
-                        New Game
-                    </Link>
+                    {/*<Link*/}
+                    {/*    to="/newGame"*/}
+                    {/*    className="mdl-button mdl-js-button"*/}
+                    {/*>*/}
+                    {/*    New Game*/}
+                    {/*</Link>*/}
                 </div>
                 <div className="mdl-grid">
                     <table className="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">

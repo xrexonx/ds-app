@@ -41,10 +41,10 @@ class NewGame extends Component {
         await this.playerAttack();
         await this.dragonAttack();
 
-        this.checkOpponentsLife();
+        this.checkLife();
     };
 
-    checkOpponentsLife() {
+    checkLife() {
         let status;
         const { player, dragon } = this.state;
         if (dragon <= 0) {
