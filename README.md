@@ -2,6 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Tech Stack
   * [React JS](https://reactjs.org/)
+  * [Yarn](https://yarnpkg.com/)
   * [Material Design Lite](https://getmdl.io/)
   
 ## Project Setup
