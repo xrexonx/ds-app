@@ -4,8 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Assuming that you already installed the requirements
 
-### `yarn install`
+### `$ git clone https://github.com/xrexonx/ds-app.git && cd ds-app`
+
+### `$ yarn install`
 
 Runs the app in the development mode.<br>
-### `yarn start`
+### `$ yarn start`
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
