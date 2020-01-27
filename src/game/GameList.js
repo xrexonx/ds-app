@@ -37,7 +37,6 @@ class GameList extends Component {
                     <table className="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                         <thead>
                         <tr>
-                            <th className="mdl-data-table__cell--non-numeric"/>
                             <th className="mdl-data-table__cell--non-numeric">Status</th>
                             <th className="mdl-data-table__cell--non-numeric">Game time</th>
                             <th className="mdl-data-table__cell--non-numeric">Date played</th>

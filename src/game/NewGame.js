@@ -42,7 +42,6 @@ class NewGame extends Component {
         await this.dragonAttack();
 
         this.checkOpponentsLife();
-
     };
 
     checkOpponentsLife() {
