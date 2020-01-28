@@ -1,7 +1,6 @@
 import { Http } from '../_utils/http';
 
-
-const API_URL = 'localhost:8080';
+const API_URL = 'localhost:8765';
 
 export function signUp(data) {
     localStorage.clear();
@@ -19,15 +18,19 @@ export function login(data) {
     // return Http.post(`${API_URL}/login`, { body: JSON.stringify({ user, pass })});
 }
 
-export function logout(user) {
+export function logout() {
     localStorage.clear();
-    // return Http.post(`${API_URL}/logout`, { user });
 }
 
-function setAuth(data) {
+export function setAuth(data) {
     localStorage.setItem('userAuth', JSON.stringify(data))
 }
 
+export function getAuthUser() {
+    const authUser = localStorage.getItem('userAuth') || '{}';
+    return JSON.parse(authUser);
+}
+
 export function checkAuth() {
-    return !!Object.keys(JSON.parse(localStorage.getItem('userAuth'))).length;
+    return !!Object.keys(getAuthUser()).length;
 }

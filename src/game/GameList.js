@@ -2,16 +2,22 @@ import React, { Component } from 'react';
 import {fetchPreviousGames, getGameStatus} from './services';
 import { Link } from 'react-router-dom';
 import GameItem from './GameItem';
+import { checkAuth } from '../login/services';
 
 class GameList extends Component {
+
+    state = {
+        isAuth: false
+    };
 
     fetchGames() {
         return fetchPreviousGames(1);
     }
 
     async componentDidMount() {
+        console.log('checkAuth', checkAuth());
         const prevGames = await this.fetchGames();
-        this.setState({ prevGames })
+        this.setState({ prevGames, isAuth: checkAuth() })
     }
 
     render() {
@@ -23,7 +29,7 @@ class GameList extends Component {
             }
         });
         return (
-            <main className="mdl-layout__content">
+            <div className="mdl-layout__content">
                 <div className="mdl-grid">
                     <h5>Previous Games</h5>
                     {/*<Link*/}
@@ -48,7 +54,7 @@ class GameList extends Component {
                         </tbody>
                     </table>
                 </div>
-            </main>
+            </div>
         );
     }
 }

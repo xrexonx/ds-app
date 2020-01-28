@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import Commentary from "./Commentary";
 import { saveGame } from './services'
+import { checkAuth } from '../login/services';
 
 class NewGame extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            player: 100,
-            dragon: 100,
-            commentary: []
-        }
-    }
+    state = {
+        player: 100,
+        dragon: 100,
+        commentary: [],
+        isAuth: false
+    };
+
+    componentDidMount() {
+        // this.setState({ isAuth: checkAuth() });
+    };
 
     generateRandom = () => {
         return Math.floor(Math.random() * 10);
@@ -90,9 +93,12 @@ class NewGame extends Component {
     }
 
     render() {
+        // if (!this.state.isAuth) {
+        //     this.props.history.push('/');
+        // }
         const { player, dragon, commentary } = this.state;
         return (
-            <main className="mdl-layout__content">
+            <div className="mdl-layout__content">
                 <div className="mdl-grid">
                     <h4>New Game</h4>
                 </div>
@@ -149,7 +155,7 @@ class NewGame extends Component {
                     </div>
                     <Commentary commentary={commentary}/>
                 </div>
-            </main>
+            </div>
         );
     }
 }
