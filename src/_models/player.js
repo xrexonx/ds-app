@@ -1,4 +1,4 @@
-import { Storage } from '../_utils/storage'
+import { Storage } from '../_utils/storage';
 
 function toArrayItems(strData) {
     let arrData = [];
@@ -22,6 +22,6 @@ export const Player = {
             const { userName, password } = JSON.parse(player);
             return userName === uName && password === pass;
         });
-        return JSON.parse(player);
+        return player ? JSON.parse(player) : {};
     }
 };

@@ -22,20 +22,20 @@ class Login extends Component {
     };
 
     getUserInfo = () => {
-        const userName = document.querySelector('#username').value;
+        const username = document.querySelector('#username').value;
         const password = document.querySelector('#password').value;
-        return { userName, password }
-    };
-
-    genericValidation = (formData) => {
-        // TODO: Add validation here.
-        return formData;
+        return { username, password }
     };
 
     login = async () => {
-        const { userName, password } = this.genericValidation(this.getUserInfo());
-        await loginUser({ userName, password });
-        this.setState({ isAuth: checkAuth() });
+        const loginData = this.getUserInfo();
+        const loginResponse = await loginUser(loginData);
+        if (Object.keys(loginResponse).length) {
+            setAuth(loginResponse);
+            this.setState({ isAuth: checkAuth() });
+        } else {
+            alert('Player not found');
+        }
     };
 
     signUp = async () => {
@@ -48,7 +48,6 @@ class Login extends Component {
     };
 
     render() {
-        console.log('this.state.isAuth', this.state.isAuth);
         if (this.state.isAuth) {
             this.props.history.push('gameList');
         }
