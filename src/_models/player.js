@@ -8,9 +8,13 @@ function toArrayItems(strData) {
     return arrData;
 }
 
+function generateId() {
+    return Math.floor(Math.random() * 10000);
+}
+
 export const Player = {
     save: (data) => {
-        Storage.setItems('players', JSON.stringify(data));
+        Storage.setItems('players', JSON.stringify({ id: generateId(), ...data}));
         return Player.findByUsernameAndPassword(data.userName, data.password);
     },
     findAll: () => {

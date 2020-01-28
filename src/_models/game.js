@@ -5,23 +5,24 @@ function toArrayItems(strData) {
     if (typeof strData === 'string') {
         arrData = strData.split('|');
     }
-    return arrData;
+    return arrData.map(data => JSON.parse(data));
+}
+
+function generateId() {
+    return Math.floor(Math.random() * 10000);
 }
 
 export const Game = {
     save: (data) => {
-        Storage.setItems('games', JSON.stringify(data));
-        return Game.findByUsernameAndPassword(data.userName, data.password);
+        const gameId = generateId();
+        Storage.setItems('games', JSON.stringify({ id: gameId, date: new Date(), ...data}));
+        return Game.findByPlayerId(gameId);
     },
     findAll: () => {
-        const games = Game.getItem('games');
+        const games = Storage.getItem('games');
         return toArrayItems(games);
     },
     findByPlayerId: (pId) => {
-        const game = Game.findAll().find(game => {
-            const { playerId } = JSON.parse(game);
-            return playerId === pId;
-        });
-        return JSON.parse(game);
+        return Game.findAll().filter(({playerId}) => playerId === pId);
     }
 };

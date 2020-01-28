@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {fetchPreviousGames, getGameStatus} from './services';
 import { Link } from 'react-router-dom';
 import GameItem from './GameItem';
-import { checkAuth, logoutUser } from '../login/services';
+import {checkAuth, getAuthUser, logoutUser} from '../login/services';
 
 class GameList extends Component {
 
@@ -11,7 +11,7 @@ class GameList extends Component {
     };
 
     fetchGames() {
-        return fetchPreviousGames(1);
+        return fetchPreviousGames(getAuthUser().id);
     }
 
     async componentDidMount() {
@@ -55,7 +55,6 @@ class GameList extends Component {
                         <thead>
                         <tr>
                             <th className="mdl-data-table__cell--non-numeric">Status</th>
-                            <th className="mdl-data-table__cell--non-numeric">Game time</th>
                             <th className="mdl-data-table__cell--non-numeric">Date played</th>
                         </tr>
                         </thead>

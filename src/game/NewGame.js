@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Commentary from "./Commentary";
 import { saveGame } from './services'
-import { checkAuth, getAuthUser, logoutUser } from '../login/services';
+import { getAuthUser, logoutUser } from '../login/services';
 import { Link, withRouter } from 'react-router-dom';
 
 class NewGame extends Component {
@@ -53,18 +53,16 @@ class NewGame extends Component {
         this.checkLife();
     };
 
-    checkLife() {
-        let status;
+    async checkLife() {
         const { player, dragon } = this.state;
         if (dragon <= 0) {
             alert('You win');
-            status = 1
+            await this.saveGame(1);
         }
         if (player <= 0) {
             alert('You lose');
-            status = 0;
+            await this.saveGame(0);
         }
-        // this.saveGame(status);
     }
 
     blast = () => {
@@ -82,20 +80,16 @@ class NewGame extends Component {
         }
     };
 
-    giveUp() {
-        // this.saveGame(0);
-        this.props.history.push('/gameList')
+    async giveUp() {
+        await this.saveGame(0);
+        this.props.history.push('/gameList');
     }
 
     async saveGame(status) {
-        const data = {
-            status,
-            gameTime: '',
-            playerId: 1
-        };
+        const data = { status, playerId: getAuthUser().id };
         const saveGameResponse = await saveGame(data);
         if (saveGameResponse) {
-            // Redirect to game list
+            this.props.history.push('/gameList');
         }
     }
 

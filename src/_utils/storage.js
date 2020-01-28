@@ -1,5 +1,3 @@
-
-
 function _getItem(key) {
     return localStorage.getItem(key);
 }

@@ -5,7 +5,6 @@ const GameItem = ({item}) => {
     return (
         <tr>
             <td className="mdl-data-table__cell--non-numeric">{item.status}</td>
-            <td className="mdl-data-table__cell--non-numeric">{item.gameTime}</td>
             <td className="mdl-data-table__cell--non-numeric">{item.date}</td>
             <td className="mdl-data-table__cell--non-numeric">
                 <Link to={`/game/${item.id}`}>View</Link>
