@@ -6,13 +6,11 @@ import NewGame from "../game/NewGame";
 
 const Main = () => {
     return (
-        <main className="mdl-layout__content">
-            <Fragment>
-                <Route path="/" exact component={Login} />
-                <Route path="/gameList" component={GameList} />
-                <Route path="/newGame" component={NewGame} />
-            </Fragment>
-        </main>
+        <Fragment>
+            <Route path="/" exact component={Login} />
+            <Route path="/gameList" component={GameList} />
+            <Route path="/newGame" component={NewGame} />
+        </Fragment>
     );
 };
 

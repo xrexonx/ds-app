@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Commentary from "./Commentary";
 import { saveGame } from './services'
-import { checkAuth } from '../login/services';
+import { checkAuth, getAuthUser, logoutUser } from '../login/services';
+import { Link } from 'react-router-dom';
 
 class NewGame extends Component {
 
@@ -9,11 +10,16 @@ class NewGame extends Component {
         player: 100,
         dragon: 100,
         commentary: [],
-        isAuth: false
+        isAuth: false,
+        playerName: 'Player'
     };
 
     componentDidMount() {
-        // this.setState({ isAuth: checkAuth() });
+        const { username, fullName } = getAuthUser();
+        const playerName = username || fullName;
+        if (playerName) {
+            this.setState({ playerName });
+        }
     };
 
     generateRandom = () => {
@@ -22,8 +28,8 @@ class NewGame extends Component {
 
     playerAttack = () => {
         const damage = this.generateRandom();
-        const { dragon, commentary } = this.state;
-        const comment = `Player attack the dragon by ${damage}`;
+        const { dragon, commentary, playerName } = this.state;
+        const comment = `${playerName} attack the dragon by ${damage}`;
         this.setState({
             dragon: dragon - damage,
             commentary: [comment, ...commentary]
@@ -92,21 +98,39 @@ class NewGame extends Component {
         }
     }
 
+    logout = () => {
+        logoutUser();
+        this.props.history.push('/')
+    };
+
     render() {
         // if (!this.state.isAuth) {
         //     this.props.history.push('/');
         // }
-        const { player, dragon, commentary } = this.state;
+        const { player, dragon, commentary, playerName } = this.state;
         return (
             <div className="mdl-layout__content">
-                <div className="mdl-grid">
-                    <h4>New Game</h4>
+                <div className="mdl-grid mdl-cell--12-col">
+                    <div className="mdl-cell mdl-cell--6-col">
+                        <h2 className="mdl-card__title-text">New Game</h2>
+                    </div>
+                    <div className="mdl-layout-spacer"/>
+                    <div className="mdl-cell mdl-cell--6-col">
+                        <Link to="/gameList" className="mdl-button mdl-js-button">
+                            Previous Games
+                        </Link>
+                        <button
+                            onClick={this.logout}
+                            className="mdl-button mdl-js-button">
+                            Logout
+                        </button>
+                    </div>
                 </div>
                 <div className="mdl-grid">
                     <div className="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
                         <div className="mdl-grid mdl-cell--12-col">
                             <div className="mdl-cell mdl-cell--6-col">
-                                <span>Player Name</span>
+                                <span>{playerName}</span>
                                 <input
                                     id="player-life"
                                     className="mdl-slider mdl-js-slider mdl-color--teal-300"

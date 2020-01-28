@@ -18,7 +18,7 @@ export function login(data) {
     // return Http.post(`${API_URL}/login`, { body: JSON.stringify({ user, pass })});
 }
 
-export function logout() {
+export function logoutUser() {
     localStorage.clear();
 }
 

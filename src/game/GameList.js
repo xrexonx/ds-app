@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {fetchPreviousGames, getGameStatus} from './services';
 import { Link } from 'react-router-dom';
 import GameItem from './GameItem';
-import { checkAuth } from '../login/services';
+import { checkAuth, logoutUser } from '../login/services';
 
 class GameList extends Component {
 
@@ -15,10 +15,14 @@ class GameList extends Component {
     }
 
     async componentDidMount() {
-        console.log('checkAuth', checkAuth());
         const prevGames = await this.fetchGames();
         this.setState({ prevGames, isAuth: checkAuth() })
     }
+
+    logout = () => {
+        logoutUser();
+        this.props.history.push('/');
+    };
 
     render() {
         const prevGames = this.state && this.state.prevGames;
@@ -30,16 +34,23 @@ class GameList extends Component {
         });
         return (
             <div className="mdl-layout__content">
-                <div className="mdl-grid">
-                    <h5>Previous Games</h5>
-                    {/*<Link*/}
-                    {/*    to="/newGame"*/}
-                    {/*    className="mdl-button mdl-js-button"*/}
-                    {/*>*/}
-                    {/*    New Game*/}
-                    {/*</Link>*/}
+                <div className="mdl-grid mdl-cell--12-col">
+                    <div className="mdl-cell mdl-cell--6-col mdl-typography--text-left">
+                        <h2 className="mdl-card__title-text">Previous Games</h2>
+                    </div>
+                    <div className="mdl-layout-spacer"/>
+                    <div className="mdl-cell mdl-cell--6-col mdl-typography--text-right">
+                        <Link to="/newGame" className="mdl-button mdl-js-button">
+                            New Game
+                        </Link>
+                        <button
+                            onClick={this.logout}
+                            className="mdl-button mdl-js-button">
+                            Logout
+                        </button>
+                    </div>
                 </div>
-                <div className="mdl-grid">
+                <div className="mdl-grid mdl-cell--12-col">
                     <table className="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                         <thead>
                         <tr>
