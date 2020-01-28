@@ -1,14 +1,18 @@
 import { Http } from '../_utils/http';
-
+import { Player } from '../_models/player';
+import { Storage } from '../_utils/storage';
 const API_URL = 'localhost:8765';
 
-export function signUp(data) {
-    localStorage.clear();
-    setAuth(data);
+export function signUpUser(data) {
+
+    console.log({data});
+
+    return Promise.resolve(Player.save(data));
+
     // return Http.post(`${API_URL}/signup`, data);
 }
 
-export function login(data) {
+export function loginUser(data) {
     // const { user, pass } = data;
     setAuth({
         ...data,
@@ -19,11 +23,11 @@ export function login(data) {
 }
 
 export function logoutUser() {
-    localStorage.clear();
+    Storage.clear();
 }
 
 export function setAuth(data) {
-    localStorage.setItem('userAuth', JSON.stringify(data))
+    Storage.setItem('userAuth', JSON.stringify(data));
 }
 
 export function getAuthUser() {

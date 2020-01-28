@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Commentary from "./Commentary";
 import { saveGame } from './services'
 import { checkAuth, getAuthUser, logoutUser } from '../login/services';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class NewGame extends Component {
 
@@ -84,6 +84,7 @@ class NewGame extends Component {
 
     giveUp() {
         // this.saveGame(0);
+        this.props.history.push('/gameList')
     }
 
     async saveGame(status) {
@@ -184,4 +185,4 @@ class NewGame extends Component {
     }
 }
 
-export default NewGame;
+export default withRouter(NewGame);

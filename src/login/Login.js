@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { checkAuth, login } from './services';
+import { checkAuth, loginUser, setAuth, signUpUser } from './services';
 import SimpleButton from '../_widgets/SimpleButton';
 
 class Login extends Component {
@@ -34,15 +34,17 @@ class Login extends Component {
 
     login = async () => {
         const { userName, password } = this.genericValidation(this.getUserInfo());
-        await login({ userName, password });
+        await loginUser({ userName, password });
         this.setState({ isAuth: checkAuth() });
     };
 
     signUp = async () => {
-        this.props.history.push('/gameList');
-        // const { userName, password } = this.getUserInfo();
-        // const fullName = document.querySelector('#fullName').value;
-        // this.props.history.push('gameList');
+        const fullName = document.querySelector('#fullName').value;
+        const userName = document.querySelector('#userName').value;
+        const password = document.querySelector('#passWord').value;
+        const signUpResponse = await signUpUser({ userName, password, fullName });
+        setAuth(signUpResponse);
+        this.setState({ isAuth: checkAuth() });
     };
 
     render() {
@@ -99,16 +101,16 @@ class Login extends Component {
 
                                     <div className="mdl-card__supporting-text">
                                         <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input className="mdl-textfield__input" id="fullname" required />
-                                            <label className="mdl-textfield__label" htmlFor="fullname">Full name</label>
+                                            <input className="mdl-textfield__input" id="fullName" required />
+                                            <label className="mdl-textfield__label" htmlFor="fullName">Full name</label>
                                         </div>
                                         <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input className="mdl-textfield__input" id="username" required />
-                                            <label className="mdl-textfield__label" htmlFor="username">Username</label>
+                                            <input className="mdl-textfield__input" id="userName" required />
+                                            <label className="mdl-textfield__label" htmlFor="userName">Username</label>
                                         </div>
                                         <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input className="mdl-textfield__input" type="password" id="password" required />
-                                            <label className="mdl-textfield__label" htmlFor="password">Password</label>
+                                            <input className="mdl-textfield__input" type="password" id="passWord" required />
+                                            <label className="mdl-textfield__label" htmlFor="passWord">Password</label>
                                         </div>
                                     </div>
 
