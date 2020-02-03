@@ -8,7 +8,7 @@ export function fetchPreviousGames(playerId) {
     return Game.findByPlayerId(playerId);
 }
 
-export function saveGame(data) {
+export function saveGames(data) {
     return Promise.resolve(Game.save(data));
     // return Http.post(`${API_URL}/game`, { body: JSON.stringify(data)})
 }

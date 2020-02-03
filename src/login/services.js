@@ -18,7 +18,7 @@ export function logoutUser() {
     Storage.remove('userAuth');
 }
 
-export function setAuth(data) {
+export function setUserAuth(data) {
     Storage.setItem('userAuth', JSON.stringify(data));
 }
 
